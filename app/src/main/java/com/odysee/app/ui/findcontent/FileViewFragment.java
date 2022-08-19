@@ -79,6 +79,7 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.Tracks;
 import com.google.android.exoplayer2.database.ExoDatabaseProvider;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.cache.LeastRecentlyUsedCacheEvictor;
@@ -1611,6 +1612,22 @@ public class FileViewFragment extends BaseFragment implements
             }
         });
 
+        playerView.findViewById(R.id.player_toggle_aspect_ratio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isInFullscreenMode()) {
+                    if(playerView.getResizeMode() == AspectRatioFrameLayout.RESIZE_MODE_FIT) {
+                        playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
+                    }
+                    else if (playerView.getResizeMode() == AspectRatioFrameLayout.RESIZE_MODE_ZOOM) {
+                        playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+                    }
+                    else if (playerView.getResizeMode() == AspectRatioFrameLayout.RESIZE_MODE_FILL) {
+                        playerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
+                    }
+                }
+            }
+        });
         playerView.findViewById(R.id.player_toggle_fullscreen).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
